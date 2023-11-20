@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja de Eletrodomésticos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Loja de Eletrodomésticos</h1>
+
+    <h2>Clientes</h2>
+    <ul>
+        {% for cliente in clientes %}
+            <li>{{ cliente.nome }} - {{ cliente.contato }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Produtos</h2>
+    <ul>
+        {% for produto in produtos %}
+            <li>{{ produto.nome }} - R$ {{ produto.preco }} - Estoque: {{ produto.quantidade_estoque }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Cadastrar Cliente</h2>
+    <form action="{{ url_for('cadastrar_cliente') }}" method="post">
+        <input type="text" name="nome" placeholder="Nome" required>
+        <input type="text" name="endereco" placeholder="Endereço" required>
+        <input type="text" name="contato" placeholder="Contato" required>
+        <input type="submit" value="Cadastrar Cliente">
+    </form>
+
+    <h2>Cadastrar Produto</h2>
+    <form action="{{ url_for('cadastrar_produto') }}" method="post">
+        <input type="text" name="nome" placeholder="Nome" required>
+        <input type="text" name="descricao" placeholder="Descrição" required>
+        <input type="number" name="preco" placeholder="Preço" step="0.01" required>
+        <input type="number" name="quantidade_estoque" placeholder="Quantidade em Estoque" required>
+        <input type="submit" value="Cadastrar Produto">
+    </form>
+</body>
+</html>
